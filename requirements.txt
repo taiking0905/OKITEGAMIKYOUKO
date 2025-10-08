@@ -1,5 +1,1 @@
-discords
-asyncio
-commands
-sys
-os
+discord.py>=2.3.0
