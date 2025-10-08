@@ -1,0 +1,5 @@
+discords
+asyncio
+commands
+sys
+os
