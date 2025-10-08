@@ -1,0 +1,34 @@
+name: OKITEGAMIKYOUKO
+
+# スケジュール設定
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # 毎週月曜 0:00 UTCに実行
+  workflow_dispatch:     # 手動実行も可能
+
+jobs:
+  delete_messages:
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Python 環境をセットアップ
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # 依存関係インストール
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      # Discord Bot 実行
+      - name: Run Discord Bot
+        env:
+            DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+            DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
+        run: python OKITEGAMIKYOUKO.py
+        
